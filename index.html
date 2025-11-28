@@ -85,9 +85,43 @@
                 </button>
             </aside>
 
-    
+            <!-- Results -->
+            <section class="browse-main">
+                <div class="browse-toolbar">
+                    <div>
+                        <span id="resultsCount">0</span> results
+                    </div>
+
+                    <div class="sort-controls">
+                        <label for="sortField">Sort</label>
+                        <select id="sortField">
+                            <option value="name">Product Name</option>
+                            <option value="price">Price</option>
+                            <option value="category">Category</option>
+                        </select>
+                        <button id="sortDirection" class="secondary-button small"
+                                data-direction="asc">AZ</button>
+                    </div>
+                </div>
+
+                <div id="activeFilters" class="active-filters">
+                    <!-- filter chips -->
+                </div>
+
+                <div id="browseResults" class="card-grid">
+                    <!-- product cards -->
+                </div>
+
+                <p id="noResultsMessage" class="muted hidden">
+                    No products match the selected filters.
+                </p>
+            </section>
+        </div>
+    </article>
+
 
 </body>
 </html>
+
 
 
