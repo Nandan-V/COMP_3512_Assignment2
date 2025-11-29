@@ -119,9 +119,66 @@
         </div>
     </article>
 
+    <!-- SINGLE PRODUCT VIEW -->
+    <article id="view-product" class="view hidden">
+        <header class="view-header">
+            <nav class="breadcrumbs" id="productBreadcrumbs">
+                <!-- Home > Gender > Category > Product Title -->
+            </nav>
+        </header>
+
+        <section class="product-layout">
+            <div class="product-images">
+                <div id="productMainImage" class="image-placeholder"></div>
+                <div class="thumb-row">
+                    <div class="thumb-placeholder"></div>
+                    <div class="thumb-placeholder"></div>
+                    <div class="thumb-placeholder"></div>
+                </div>
+            </div>
+
+            <div class="product-details">
+                <h1 id="productTitle"></h1>
+                <p id="productPrice" class="product-price"></p>
+                <p id="productDescription"></p>
+                <p><strong>Material:</strong> <span id="productMaterial"></span></p>
+
+                <form id="productOptions" class="product-options">
+                    <label>
+                        Size
+                        <select id="productSize"></select>
+                    </label>
+
+                    <label>
+                        Color
+                        <select id="productColor"></select>
+                    </label>
+
+                    <label>
+                        Quantity
+                        <input type="number" id="productQuantity" min="1" value="1">
+                    </label>
+
+                    <button id="productAddToCart" class="primary-button" type="submit">
+                        + Add to Cart
+                    </button>
+                </form>
+            </div>
+        </section>
+
+        <section class="related-products">
+            <h2>Related Products</h2>
+            <div id="relatedProducts" class="card-grid">
+                <!-- populated by JS -->
+            </div>
+        </section>
+    </article>
+
+
 
 </body>
 </html>
+
 
 
 
