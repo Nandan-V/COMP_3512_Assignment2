@@ -173,11 +173,90 @@
             </div>
         </section>
     </article>
+    
+    <!-- CART VIEW -->
+    <article id="view-cart" class="view hidden">
+        <header class="view-header">
+            <h1>Shopping Cart</h1>
+        </header>
+
+        <section class="cart-layout">
+            <div class="cart-items">
+                <table class="cart-table">
+                    <thead>
+                    <tr>
+                        <th></th>
+                        <th>Item</th>
+                        <th>Color</th>
+                        <th>Size</th>
+                        <th>Price</th>
+                        <th>Qty</th>
+                        <th>Subtotal</th>
+                    </tr>
+                    </thead>
+                    <tbody id="cartBody">
+                    <!-- rows from JS -->
+                    </tbody>
+                </table>
+                <p id="emptyCartMessage" class="muted">
+                    Your cart is empty.
+                </p>
+            </div>
+
+            <aside class="cart-summary">
+                <section class="shipping">
+                    <h2>Shipping</h2>
+                    <label>
+                        Method
+                        <select id="shippingMethod">
+                            <option value="standard">Standard</option>
+                            <option value="express">Express</option>
+                            <option value="priority">Priority</option>
+                        </select>
+                    </label>
+                    <label>
+                        Destination
+                        <select id="shippingDestination">
+                            <option value="CA">Canada</option>
+                            <option value="US">United States</option>
+                            <option value="INTL">International</option>
+                        </select>
+                    </label>
+                </section>
+
+                <section class="summary">
+                    <h2>Summary</h2>
+                    <dl>
+                        <div class="summary-row">
+                            <dt>Merchandise</dt>
+                            <dd id="summaryMerchandise">$0.00</dd>
+                        </div>
+                        <div class="summary-row">
+                            <dt>Shipping</dt>
+                            <dd id="summaryShipping">$0.00</dd>
+                        </div>
+                        <div class="summary-row">
+                            <dt>Tax</dt>
+                            <dd id="summaryTax">$0.00</dd>
+                        </div>
+                        <div class="summary-row total">
+                            <dt>Total</dt>
+                            <dd id="summaryTotal">$0.00</dd>
+                        </div>
+                    </dl>
+                    <button id="checkoutButton" class="primary-button">
+                        Checkout
+                    </button>
+                </section>
+            </aside>
+        </section>
+    </article>
 
 
 
 </body>
 </html>
+
 
 
 
