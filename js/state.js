@@ -8,12 +8,12 @@
  * Formats text nicely (e.g., turns “womens” into “Womens”) for consistent display.
  */
 
-var DATA_URL = 'https://gist.githubusercontent.com/rconnolly/d37a491b50203d66d043c26f33dbd798/raw/37b5b68c527ddbe824eaed12073d266d5455432a/clothing-compact.json';
-var STORAGE_PRODUCTS_KEY = 'spa_products';
-var STORAGE_CART_KEY = 'spa_cart';
+const DATA_URL = 'https://gist.githubusercontent.com/rconnolly/d37a491b50203d66d043c26f33dbd798/raw/37b5b68c527ddbe824eaed12073d266d5455432a/clothing-compact.json';
+const STORAGE_PRODUCTS_KEY = 'spa_products';
+const STORAGE_CART_KEY = 'spa_cart';
 
 // Global state for the single page application.
-var state = {
+let state = {
     products: [],
     cart: [],
     currentView: 'home',
@@ -31,15 +31,15 @@ var state = {
 // Load product data once, caching to localStorage.
 // Uses fetch + JSON + localStorage.
 async function loadProducts() {
-    var stored = localStorage.getItem(STORAGE_PRODUCTS_KEY);
+    const stored = localStorage.getItem(STORAGE_PRODUCTS_KEY);
     if (stored) {
         state.products = JSON.parse(stored);
         return;
     }
 
     try {
-        var response = await fetch(DATA_URL);
-        var data = await response.json();
+        const response = await fetch(DATA_URL);
+        const data = await response.json();
         state.products = data;
         localStorage.setItem(STORAGE_PRODUCTS_KEY, JSON.stringify(data));
     } catch (err) {
@@ -51,7 +51,7 @@ async function loadProducts() {
 
 // Cart functionality using localStorage
 function loadCartFromStorage() {
-    var stored = localStorage.getItem(STORAGE_CART_KEY);
+    const stored = localStorage.getItem(STORAGE_CART_KEY);
     if (stored) {
         state.cart = JSON.parse(stored);
     } else {
@@ -64,10 +64,10 @@ function saveCartToStorage() {
 }
 
 function updateCartCount() {
-    var span = document.getElementById('cartCount');
+    const span = document.getElementById('cartCount');
     if (!span) return;
-    var totalQuantity = 0;
-    for (var i = 0; i < state.cart.length; i++) {
+    let totalQuantity = 0;
+    for (let i = 0; i < state.cart.length; i++) {
         totalQuantity += state.cart[i].quantity;
     }
     span.textContent = totalQuantity;
@@ -95,4 +95,5 @@ function capitalize(str) {
     if (!str) return '';
     return str.charAt(0).toUpperCase() + str.slice(1);
 }
+
 
