@@ -18,3 +18,24 @@ var state = {
     sortField: 'name',
     sortDirection: 'asc'
 };
+
+// Load product data once, caching to localStorage.
+// Uses fetch + JSON + localStorage.
+async function loadProducts() {
+    var stored = localStorage.getItem(STORAGE_PRODUCTS_KEY);
+    if (stored) {
+        state.products = JSON.parse(stored);
+        return;
+    }
+
+    try {
+        var response = await fetch(DATA_URL);
+        var data = await response.json();
+        state.products = data;
+        localStorage.setItem(STORAGE_PRODUCTS_KEY, JSON.stringify(data));
+    } catch (err) {
+        console.error(err);
+        // showToast is defined in other js file.
+        showToast('Error loading products');
+    }
+}
