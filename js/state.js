@@ -1,3 +1,12 @@
+/*
+ * state.js
+ * Shared application state and data-loading helpers.
+ * Loads all clothing data from the internet so the site can display products.
+ * Remembers your cart even if you refresh the page (using localStorage).
+ * Keeps the cart number updated in the header so you always see how many items you have.
+ * Calculates shipping and tax when you’re ready to check out, based on where you live and how fast you want it.
+ * Formats text nicely (e.g., turns “womens” into “Womens”) for consistent display.
+ */
 
 var DATA_URL = 'https://gist.githubusercontent.com/rconnolly/d37a491b50203d66d043c26f33dbd798/raw/37b5b68c527ddbe824eaed12073d266d5455432a/clothing-compact.json';
 var STORAGE_PRODUCTS_KEY = 'spa_products';
@@ -81,8 +90,9 @@ function calculateTax(merchandise, dest) {
     return merchandise * 0.05;
 }
 
-// Text helper for turning "womens" into "Womens" etc, using string functions.
+// String formatter for turning "womens" into "Womens" etc.
 function capitalize(str) {
     if (!str) return '';
     return str.charAt(0).toUpperCase() + str.slice(1);
 }
+
