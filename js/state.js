@@ -57,11 +57,11 @@ function saveCartToStorage() {
 function updateCartCount() {
     var span = document.getElementById('cartCount');
     if (!span) return;
-    var totalQty = 0;
+    var totalQuantity = 0;
     for (var i = 0; i < state.cart.length; i++) {
-        totalQty += state.cart[i].qty;
+        totalQuantity += state.cart[i].quantity;
     }
-    span.textContent = totalQty;
+    span.textContent = totalQuantity;
 }
 
 // Shipping and tax rules from the assignment instructions
@@ -80,3 +80,4 @@ function calculateTax(merchandise, dest) {
     if (dest !== 'CA') return 0;
     return merchandise * 0.05;
 }
+
