@@ -39,3 +39,27 @@ async function loadProducts() {
         showToast('Error loading products');
     }
 }
+
+// Cart functionality using localStorage
+function loadCartFromStorage() {
+    var stored = localStorage.getItem(STORAGE_CART_KEY);
+    if (stored) {
+        state.cart = JSON.parse(stored);
+    } else {
+        state.cart = [];
+    }
+}
+
+function saveCartToStorage() {
+    localStorage.setItem(STORAGE_CART_KEY, JSON.stringify(state.cart));
+}
+
+function updateCartCount() {
+    var span = document.getElementById('cartCount');
+    if (!span) return;
+    var totalQty = 0;
+    for (var i = 0; i < state.cart.length; i++) {
+        totalQty += state.cart[i].qty;
+    }
+    span.textContent = totalQty;
+}
