@@ -81,3 +81,8 @@ function calculateTax(merchandise, dest) {
     return merchandise * 0.05;
 }
 
+// Text helper for turning "womens" into "Womens" etc, using string functions.
+function capitalize(str) {
+    if (!str) return '';
+    return str.charAt(0).toUpperCase() + str.slice(1);
+}
