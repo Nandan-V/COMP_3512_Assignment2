@@ -63,3 +63,20 @@ function updateCartCount() {
     }
     span.textContent = totalQty;
 }
+
+// Shipping and tax rules from the assignment instructions
+function calculateShipping(merchandise, method, dest) {
+    if (merchandise === 0) return 0;
+    if (merchandise > 500) return 0;
+    var table = {
+        standard: { CA: 10, US: 15, INTL: 20 },
+        express: { CA: 25, US: 25, INTL: 30 },
+        priority: { CA: 35, US: 50, INTL: 50 }
+    };
+    return table[method][dest];
+}
+
+function calculateTax(merchandise, dest) {
+    if (dest !== 'CA') return 0;
+    return merchandise * 0.05;
+}
