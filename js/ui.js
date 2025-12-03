@@ -59,3 +59,55 @@ function setupNav() {
         });
     }
 }
+
+function setupAboutDialog() {
+    // Grab dialog shell and the controls that open/close it.
+    const dialog = document.getElementById('aboutDialog');
+    const openLink = document.getElementById('aboutLink');
+    const closeBtn = document.getElementById('aboutClose');
+    const closeFooterBtn = document.getElementById('aboutCloseFooter');
+    // Single source for the repo URL so it stays consistent.
+    const githubUrl = 'https://github.com/Nandan-V/COMP_3512_Assignment2.git';
+
+    const githubLink = document.getElementById('githubLink');
+    const footerGithubLink = document.getElementById('footerGithubLink');
+    // Keep both header/footer GitHub anchors in sync.
+    if (githubLink) {
+        githubLink.href = githubUrl;
+    }
+    if (footerGithubLink) {
+        footerGithubLink.href = githubUrl;
+    }
+
+    // Bail out if key elements are missing (older browsers or markup tweaks).
+    if (!dialog || !openLink) {
+        return;
+    }
+
+    // Feature detect <dialog>; fall back to a simple alert.
+    if (!dialog.showModal) {
+        openLink.addEventListener('click', function (e) {
+            e.preventDefault();
+            alert('About dialog not supported in this browser.');
+        });
+        return;
+    }
+
+    // Open dialog modally when About link is clicked.
+    openLink.addEventListener('click', function (e) {
+        e.preventDefault();
+        dialog.showModal();
+    });
+
+    // Shared close handler for both close buttons.
+    function closeDialog() {
+        dialog.close();
+    }
+
+    if (closeBtn) {
+        closeBtn.addEventListener('click', closeDialog);
+    }
+    if (closeFooterBtn) {
+        closeFooterBtn.addEventListener('click', closeDialog);
+    }
+}
