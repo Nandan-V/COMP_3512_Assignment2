@@ -60,4 +60,31 @@ function createProductCard(product) {
     });
 
     return card;
-    }  
+    }
+
+// openProduct: shows the single product view with all details.
+function openProduct(productId) {
+    let product = null;
+    for (let i = 0; i < state.products.length; i++) {
+        if (state.products[i].id === productId) {
+            product = state.products[i];
+            break;
+        }
+    }
+    if (!product) return;
+
+    state.currentProductId = product.id;
+
+    const crumbs = document.getElementById('productBreadcrumbs');
+    if (crumbs) {
+        crumbs.textContent = '';
+        crumbs.appendChild(document.createTextNode('Home > ' + capitalize(product.gender) + ' > ' + product.category + ' > ' + product.name));
+    }
+    
+    document.getElementById('productTitle').textContent = product.name;
+    document.getElementById('productPrice').textContent = '$' + product.price.toFixed(2);
+    document.getElementById('productDescription').textContent = product.description;
+    document.getElementById('productMaterial').textContent = product.material;
+
+
+
