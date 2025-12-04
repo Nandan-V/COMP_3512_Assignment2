@@ -86,5 +86,49 @@ function openProduct(productId) {
     document.getElementById('productDescription').textContent = product.description;
     document.getElementById('productMaterial').textContent = product.material;
 
+    const mainImg = document.getElementById('productMainImage');
+    if (mainImg) {
+        if (product.color && product.color.length > 0) {
+            mainImg.style.backgroundColor = product.color[0].hex;
+        } else {
+            mainImg.style.backgroundColor = '#e5e7eb';
+        }
+    }
+
+    const sizeSelect = document.getElementById('productSize');
+    sizeSelect.textContent = '';
+    for (let j = 0; j < product.sizes.length; j++) {
+        const optS = document.createElement('option');
+        optS.value = product.sizes[j];
+        optS.textContent = product.sizes[j];
+        sizeSelect.appendChild(optS);
+    }
+
+    const colorSelect = document.getElementById('productColor');
+    colorSelect.textContent = '';
+    for (let k = 0; k < product.color.length; k++) {
+        const optC = document.createElement('option');
+        optC.value = product.color[k].name;
+        optC.textContent = product.color[k].name;
+        colorSelect.appendChild(optC);
+    }
+
+    const quantityInput = document.getElementById('productQuantity');
+    quantityInput.value = 1;
+
+    const form = document.getElementById('productOptions');
+    form.onsubmit = function (e) {
+        e.preventDefault();
+        const size = sizeSelect.value;
+        const colorName = colorSelect.value;
+        const quantity = parseInt(quantityInput.value, 10) || 1;
+        addItemToCart(product, size, colorName, quantity);
+        showToast('Added to cart');
+    };
+
+    renderRelatedProducts(product);
+    showView('product');
+}
+
 
 
