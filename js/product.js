@@ -45,5 +45,19 @@ function createProductCard(product) {
     actions.appendChild(addBtn);
     card.appendChild(actions);
 
-    
+    // change the main content area instead of visiting a new page.
+    viewBtn.addEventListener('click', function () {
+        openProduct(product.id);
+    });
+    addBtn.addEventListener('click', function () {
+        quickAddToCart(product.id);
+    });
+    img.addEventListener('click', function () {
+        openProduct(product.id);
+    });
+    title.addEventListener('click', function () {
+        openProduct(product.id);
+    });
+
+    return card;
     }  
