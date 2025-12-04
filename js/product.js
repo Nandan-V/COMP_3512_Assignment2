@@ -1,3 +1,11 @@
+/*
+ * product.js
+ * Builds product cards for the Home, Browse, and Related sections.
+ * Shows a detailed single product view when you click a product.
+ * Lets you select size, color, and quantity, then add to cart.
+ * Handles quick “+ Cart” buttons from product cards.
+ * Merges duplicate cart items automatically so you don’t get duplicates.
+ */
 
 // createProductCard: builds a product card for display in lists.
 function createProductCard(product) {
@@ -206,6 +214,7 @@ function addItemToCart(product, size, colorName, quantity) {
     saveCartToStorage();
     updateCartCount();
 }
+
 
 
 
