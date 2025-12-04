@@ -93,7 +93,10 @@ function calculateTax(merchandise, dest) {
 // String formatter for turning "womens" into "Womens" etc.
 function capitalize(str) {
     if (!str) return '';
-    return str.charAt(0).toUpperCase() + str.slice(1);
+    const firstLetter = str[0].toUpperCase();
+    let remainingLetters = '';
+    for (let i = 1; i < str.length; i++) {
+        remainingLetters += str[i];
+    }
+    return firstLetter + remainingLetters;
 }
-
-
