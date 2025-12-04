@@ -130,5 +130,84 @@ function openProduct(productId) {
     showView('product');
 }
 
+// Show up to four other products that share gender and category.
+function renderRelatedProducts(product) {
+    const container = document.getElementById('relatedProducts');
+    if (!container) return;
+    container.textContent = ''; // Clear previous related cards.
+    // Gather matching products (excluding the current one) until we have four.
+    const related = [];
+    for (let i = 0; i < state.products.length && related.length < 4; i++) {
+        const p = state.products[i];
+        if (p.id !== product.id && p.gender === product.gender && p.category === product.category) {
+            related.push(p);
+        }
+    }
+    // Build and append small cards for each related product found.
+    for (let i = 0; i < related.length; i++) {
+        const card = createProductCard(related[i]);
+        container.appendChild(card);
+    }
+}
+
+// quickAddToCart: adds one default size/color when clicking a related card.
+function quickAddToCart(productId) {
+    let product = null;
+    for (let i = 0; i < state.products.length; i++) {
+        if (state.products[i].id === productId) {
+            product = state.products[i];
+            break;
+        }
+    }
+    if (!product){
+        return;
+    } 
+    const size = product.sizes[0];
+    const colorName = product.color.length > 0 ? product.color[0].name : '';
+    addItemToCart(product, size, colorName, 1);
+    showToast('Added to cart');
+}
+
+// addItemToCart: merge with existing cart entry for same product/size/color and persist.
+function addItemToCart(product, size, colorName, quantity) {
+    if (!quantity || quantity < 1) quantity = 1;
+
+    let colorObj = product.color[0];
+    for (let i = 0; i < product.color.length; i++) {
+        if (product.color[i].name === colorName) {
+            colorObj = product.color[i];
+            break;
+        }
+    }
+
+    let found = null;
+    for (let j = 0; j < state.cart.length; j++) {
+        const item = state.cart[j];
+        if (item.id === product.id && item.size === size && item.color === colorObj.name) {
+            found = item;
+            break;
+        }
+    }
+
+    if (found) {
+        found.quantity += quantity;
+    } else {
+        state.cart.push({
+            id: product.id,
+            name: product.name,
+            price: product.price,
+            size: size,
+            color: colorObj.name,
+            colorHex: colorObj.hex,
+            quantity: quantity
+        });
+    }
+
+    saveCartToStorage();
+    updateCartCount();
+}
+
+
+
 
 
