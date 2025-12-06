@@ -75,7 +75,9 @@ function buildGenderFilterList() {
 // populateCheckboxGroup: helper that fills a container with <label><input>.
 function populateCheckboxGroup(containerId, values) {
     const container = document.getElementById(containerId);
-    if (!container) return;
+    if (!container) {
+        return;
+    }
     container.textContent = '';
     for (let i = 0; i < values.length; i++) {
         const value = values[i];
@@ -89,3 +91,84 @@ function populateCheckboxGroup(containerId, values) {
     }
 }
 
+// setupBrowseControls: wires sort dropdown, sort direction, clear filters,
+// and filter sidebar changes. This follows the Lab 9a approach where a
+// container listens for change events to update a list.
+function setupBrowseControls() {
+    const sortField = document.getElementById('sortField');
+    const sortDirection = document.getElementById('sortDirection');
+    const clearFilters = document.getElementById('clearFilters');
+    const filterSidebar = document.querySelector('.filters');
+
+    if (sortField) {
+        sortField.addEventListener('change', function () {
+            state.sortField = this.value;
+            renderBrowseResults();
+        });
+    }
+
+    if (sortDirection) {
+        sortDirection.addEventListener('click', function () {
+            const dir = this.getAttribute('data-direction');
+            let newDir;
+            if (dir === 'asc') {
+                newDir = 'desc';
+            } else {
+                newDir = 'asc';
+            }
+            this.setAttribute('data-direction', newDir);
+            if (newDir === 'asc') {
+                this.textContent = 'A-Z';
+            } else {
+                this.textContent = 'Z-A';
+            }
+            state.sortDirection = newDir;
+            renderBrowseResults();
+        });
+    }
+
+    if (clearFilters) {
+        clearFilters.addEventListener('click', function () {
+            const checkboxes = document.querySelectorAll('.filters input[type=checkbox]');
+            for (let i = 0; i < checkboxes.length; i++) {
+                checkboxes[i].checked = false;
+            }
+            state.filters.gender = [];
+            state.filters.category = [];
+            state.filters.size = [];
+            state.filters.color = [];
+            renderBrowseResults();
+        });
+    }
+
+    if (filterSidebar) {
+        filterSidebar.addEventListener('change', function (e) {
+            if (e.target && e.target.type === 'checkbox') {
+                updateFilterState();
+                renderBrowseResults();
+            }
+        });
+    }
+}
+
+// updateFilterState/getCheckedValues mirror Lab 9a test-your-knowledge
+// problems where form controls are read and a filtered list is rebuilt.
+function updateFilterState() {
+    state.filters.gender = getCheckedValues('filter-gender');
+    state.filters.category = getCheckedValues('filter-category');
+    state.filters.size = getCheckedValues('filter-size');
+    state.filters.color = getCheckedValues('filter-color');
+}
+
+function getCheckedValues(containerId) {
+    const container = document.getElementById(containerId);
+    if (!container) return [];
+    const inputs = container.querySelectorAll('input[type=checkbox]');
+    const values = [];
+    for (let i = 0; i < inputs.length; i++) {
+        if (inputs[i].checked) {
+            values.push(inputs[i].value);
+        }
+    }
+    return values;
+}
