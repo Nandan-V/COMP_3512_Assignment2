@@ -172,3 +172,20 @@ function getCheckedValues(containerId) {
     }
     return values;
 }
+
+// removeFilterChip: when a chip's X is clicked, unchecks the matching
+// checkbox and re-renders. 
+function removeFilterChip(type, value) {
+    const containerId = 'filter-' + type;
+    const container = document.getElementById(containerId);
+    if (!container) return;
+    const inputs = container.querySelectorAll('input[type=checkbox]');
+    for (let i = 0; i < inputs.length; i++) {
+        if (inputs[i].value === value) {
+            inputs[i].checked = false;
+            break;
+        }
+    }
+    updateFilterState();
+    renderBrowseResults();
+}
