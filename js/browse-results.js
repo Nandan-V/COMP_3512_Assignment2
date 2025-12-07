@@ -75,3 +75,44 @@ function applyFilters(list) {
         return true;
     });
 }
+
+/**
+ * Sorts products by the active field/direction using a simple comparator.
+ * 
+ */
+function applySort(list) {
+    const field = state.sortField;
+    let dir;
+    if (state.sortDirection === 'asc') {
+        dir = 1;
+    } else {
+        dir = -1;
+    }
+    // Create a copy using a loop
+    const copy = [];
+    for (let i = 0; i < list.length; i++) {
+        copy.push(list[i]);
+    }
+
+    return copy.sort(function (a, b) {
+        let v1;
+        let v2;
+        if (field === 'price') {
+            v1 = a.price;
+            v2 = b.price;
+        } else if (field === 'category') {
+            v1 = a.category.toLowerCase();
+            v2 = b.category.toLowerCase();
+        } else {
+            v1 = a.name.toLowerCase();
+            v2 = b.name.toLowerCase();
+        }
+        if (v1 < v2) {
+            return -1 * dir;
+        }
+        if (v1 > v2) {
+            return 1 * dir;
+        }
+        return 0;
+    });
+}
