@@ -116,3 +116,45 @@ function applySort(list) {
         return 0;
     });
 }
+
+/**
+ * Shows chips with X buttons for each active filter and wires removal clicks.
+ * Uses a delegated click handler 
+ */
+function renderActiveFilterChips() {
+    const container = document.getElementById('activeFilters');
+    if (!container) {
+        return;
+    }
+    container.textContent = '';
+
+    // Render chips for a given filter type (e.g., gender) and its values.
+    function addChips(type, values) {
+        for (let i = 0; i < values.length; i++) {
+            const v = values[i];
+            const chip = document.createElement('span');
+            chip.className = 'filter-chip';
+            chip.appendChild(document.createTextNode(v + ' '));
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            // Store type/value on the button so the click handler knows what to remove.
+            btn.dataset.filterType = type;
+            btn.dataset.filterValue = v;
+            btn.textContent = 'x';
+            chip.appendChild(btn);
+            container.appendChild(chip);
+        }
+    }
+
+    addChips('gender', state.filters.gender);
+    addChips('category', state.filters.category);
+    addChips('size', state.filters.size);
+    addChips('color', state.filters.color);
+
+    // Delegate clicks from the container to cover all current/future chips.
+    container.addEventListener('click', function (e) {
+        if (e.target && e.target.tagName.toLowerCase() === 'button') {
+            removeFilterChip(e.target.dataset.filterType, e.target.dataset.filterValue);
+        }
+    });
+}
