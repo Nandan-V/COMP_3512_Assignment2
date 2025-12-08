@@ -27,3 +27,95 @@ function setupCartControls() {
         });
     }
 }
+
+// renderCartView: builds the cart table with all your items and controls.
+function renderCartView() {
+    const tbody = document.getElementById('cartBody');
+    if (!tbody) return;
+    tbody.textContent = '';
+
+    const emptyMsg = document.getElementById('emptyCartMessage');
+    const hasItems = state.cart.length > 0;
+    if (emptyMsg) {
+        if (hasItems) {
+            emptyMsg.classList.add('hidden');
+        } else {
+            emptyMsg.classList.remove('hidden');
+        }
+    }
+
+    const shippingMethod = document.getElementById('shippingMethod');
+    const shippingDestination = document.getElementById('shippingDestination');
+    const checkoutButton = document.getElementById('checkoutButton');
+    const disabled = !hasItems;
+    if (shippingMethod) shippingMethod.disabled = disabled;
+    if (shippingDestination) shippingDestination.disabled = disabled;
+    if (checkoutButton) checkoutButton.disabled = disabled;
+
+    for (let i = 0; i < state.cart.length; i++) {
+        const item = state.cart[i];
+        const tr = document.createElement('tr');
+
+        const removeCell = document.createElement('td');
+        const removeBtn = document.createElement('button');
+        removeBtn.className = 'cart-remove-btn';
+        removeBtn.textContent = '-';
+        removeBtn.addEventListener('click', (function (it) {
+            return function () {
+                removeCartItem(it);
+            };
+        })(item));
+        removeCell.appendChild(removeBtn);
+        tr.appendChild(removeCell);
+
+        const itemCell = document.createElement('td');
+        const thumb = document.createElement('div');
+        thumb.className = 'cart-thumb';
+        thumb.style.backgroundColor = item.colorHex || '#e5e7eb';
+        itemCell.appendChild(thumb);
+        const nameDiv = document.createElement('div');
+        nameDiv.textContent = item.name;
+        itemCell.appendChild(nameDiv);
+        tr.appendChild(itemCell);
+
+        const colorCell = document.createElement('td');
+        colorCell.textContent = item.color;
+        tr.appendChild(colorCell);
+
+        const sizeCell = document.createElement('td');
+        sizeCell.textContent = item.size;
+        tr.appendChild(sizeCell);
+
+        const priceCell = document.createElement('td');
+        priceCell.textContent = '$' + item.price.toFixed(2);
+        tr.appendChild(priceCell);
+
+        const quantityCell = document.createElement('td');
+        const quantityInput = document.createElement('input');
+        quantityInput.type = 'number';
+        quantityInput.min = '1';
+        quantityInput.value = item.quantity;
+        quantityInput.className = 'cart-qty-input';
+        quantityInput.addEventListener('change', (function (it) {
+            return function () {
+                const newQuantity = parseInt(this.value, 10) || 1;
+                if (newQuantity < 1) newQuantity = 1;
+                it.quantity = newQuantity;
+                saveCartToStorage();
+                updateCartCount();
+                renderCartView();
+            };
+        })(item));
+        quantityCell.appendChild(quantityInput);
+        tr.appendChild(quantityCell);
+
+        const subCell = document.createElement('td');
+        const subtotal = item.price * item.quantity;
+        subCell.textContent = '$' + subtotal.toFixed(2);
+        tr.appendChild(subCell);
+
+        tbody.appendChild(tr);
+    }
+
+    updateCartSummary();
+}
