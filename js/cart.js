@@ -132,3 +132,25 @@ function removeCartItem(itemToRemove) {
     updateCartCount();
     renderCartView();
 }
+
+// updateCartSummary: calculates merchandise total, shipping, tax, and final amount.
+function updateCartSummary() {
+    let merchandise = 0;
+    for (let i = 0; i < state.cart.length; i++) {
+        merchandise += state.cart[i].price * state.cart[i].quantity;
+    }
+
+    const shippingMethod = document.getElementById('shippingMethod');
+    const shippingDestination = document.getElementById('shippingDestination');
+    const method = shippingMethod ? shippingMethod.value : 'standard';
+    const dest = shippingDestination ? shippingDestination.value : 'CA';
+
+    const shipping = calculateShipping(merchandise, method, dest);
+    const tax = calculateTax(merchandise, dest);
+    const total = merchandise + shipping + tax;
+
+    document.getElementById('summaryMerchandise').textContent = '$' + merchandise.toFixed(2);
+    document.getElementById('summaryShipping').textContent = '$' + shipping.toFixed(2);
+    document.getElementById('summaryTax').textContent = '$' + tax.toFixed(2);
+    document.getElementById('summaryTotal').textContent = '$' + total.toFixed(2);
+}
