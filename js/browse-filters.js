@@ -40,7 +40,6 @@ function buildDynamicFilters() {
 }
 
 // buildGenderFilterList: populates the gender filter checkboxes.
-// Follows the dynamic list-building style from Lab 8 and Lab 9a.
 function buildGenderFilterList() {
     const container = document.getElementById('genderFilterList');
     if (!container){
@@ -92,8 +91,7 @@ function populateCheckboxGroup(containerId, values) {
     }
 }
 
-// setupBrowseControls: wires sort dropdown, sort direction, clear filters,
-// and filter sidebar changes. This follows the Lab 9a approach where a
+// setupBrowseControls: wires sort dropdown, sort direction, clear filters, and filter sidebar changes. 
 // container listens for change events to update a list.
 function setupBrowseControls() {
     const sortField = document.getElementById('sortField');
@@ -152,7 +150,6 @@ function setupBrowseControls() {
     }
 }
 
-// updateFilterState/getCheckedValues mirror Lab 9a test-your-knowledge
 // problems where form controls are read and a filtered list is rebuilt.
 function updateFilterState() {
     state.filters.gender = getCheckedValues('filter-gender');
