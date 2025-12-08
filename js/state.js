@@ -44,7 +44,7 @@ async function loadProducts() {
         localStorage.setItem(STORAGE_PRODUCTS_KEY, JSON.stringify(data));
     } catch (err) {
         console.error(err);
-        // showToast is defined in other js file.
+        // showToast is defined in ui js file.
         showToast('Error loading products');
     }
 }
@@ -100,3 +100,4 @@ function capitalize(str) {
     }
     return firstLetter + remainingLetters;
 }
+
