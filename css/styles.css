@@ -150,7 +150,10 @@ main {
 }
 
 .hero {
-    background: linear-gradient(135deg, #111827, #1f2937);
+    background: linear-gradient(135deg, rgba(17, 24, 39, 0.7), rgba(31, 41, 55, 0.7)), url('https://static.vecteezy.com/system/resources/thumbnails/035/648/803/small/ai-generated-clothing-store-display-cases-and-racks-with-clothes-ai-generated-image-photo.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     color: #f9fafb;
     border-radius: 1rem;
     padding: 2.5rem 2rem;
