@@ -1,7 +1,8 @@
 /*
  * browse-filters.js
- * Builds dynamic filter lists and wires up filter / sort controls.
-
+ * Builds the filters for the Browse page.
+ * Scans all products to create lists for category, size, and color,
+ * and prepares the controls that let you narrow down what you see.
  */
 
 // buildDynamicFilters: scans products and builds checkbox lists.
