@@ -1,8 +1,8 @@
 /*
  * browse-results.js
- * Applies filters/sorting and renders the Browse product grid.
- *
- *
+ * Uses the current filters and sort settings to decide which products to show.
+ * Updates the Browse grid, result count, and "no results" message whenever the
+ * user changes filters or sort options.
  */
 
 /**
@@ -41,10 +41,7 @@ function renderBrowseResults() {
     }
 }
 
-/**
- * Returns only products matching the current filter selections.
- * 
- */
+// Returns only products matching the current filter selections.
 function applyFilters(list) {
     // Each filter returns early if the current product does not match.
     return list.filter(function (product) {
@@ -76,10 +73,7 @@ function applyFilters(list) {
     });
 }
 
-/**
- * Sorts products by the active field/direction using a simple comparator.
- * 
- */
+// Sorts products by the active field/direction using a simple comparator.
 function applySort(list) {
     const field = state.sortField;
     let dir;
