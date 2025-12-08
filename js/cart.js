@@ -119,3 +119,16 @@ function renderCartView() {
 
     updateCartSummary();
 }
+
+// removeCartItem: removes an item from your cart and updates everything.
+function removeCartItem(itemToRemove) {
+    for (let i = 0; i < state.cart.length; i++) {
+        if (state.cart[i] === itemToRemove) {
+            state.cart.splice(i, 1);
+            break;
+        }
+    }
+    saveCartToStorage();
+    updateCartCount();
+    renderCartView();
+}
