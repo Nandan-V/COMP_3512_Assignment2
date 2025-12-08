@@ -1,3 +1,11 @@
+/*
+ * ui.js
+ * Shared UI helpers for the shopping website.
+ * Manages navigation between pages, shows feedback messages, and handles the About dialog.
+ * Updates the footer year and keeps everything working smoothly.
+ */
+
+// setFooterYear: updates the copyright year in the footer automatically.
 function setFooterYear() {
     const yearSpan = document.getElementById('footerYear');
     if (yearSpan) {
@@ -23,7 +31,7 @@ function showView(viewName) {
         renderCartView();
     }
 }
-// Snackbar/toast feedback inspired by Lab 9b Exercise 9b.5.
+// showToast: shows a temporary message at the bottom of the screen.
 function showToast(message) {
     const bar = document.getElementById('toast');
     if (!bar) return;
@@ -60,6 +68,7 @@ function setupNav() {
     }
 }
 
+// setupAboutDialog: handles the About popup window.
 function setupAboutDialog() {
     // Grab dialog shell and the controls that open/close it.
     const dialog = document.getElementById('aboutDialog');
