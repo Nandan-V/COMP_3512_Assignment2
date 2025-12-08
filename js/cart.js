@@ -1,6 +1,9 @@
 /*
  * cart.js
-
+ * Manages your shopping cart, shows what you've added, and handles checkout.
+ * Lets you change quantities, remove items, and see shipping costs and taxes.
+ * Calculates your total based on where you live and how fast you want shipping.
+ * Saves your cart so you don't lose it when you refresh the page.
  */
 
 // setupCartControls: adds event listeners for shipping options and checkout button.
@@ -154,3 +157,5 @@ function updateCartSummary() {
     document.getElementById('summaryTax').textContent = '$' + tax.toFixed(2);
     document.getElementById('summaryTotal').textContent = '$' + total.toFixed(2);
 }
+
+
