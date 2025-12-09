@@ -37,6 +37,36 @@ a:hover {
     text-decoration: underline;
 }
 
+/* Back to top button - matches Clear All Filters button */
+.back-to-top {
+    display: inline-block;
+    margin: 1rem 0 0;
+    padding: 0.25rem 0.75rem;
+    font-size: 0.8rem;
+    background: #e5e7eb;
+    color: #111827;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    text-decoration: none;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    font-family: inherit;
+    text-align: center;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.back-to-top:hover {
+    background: #d1d5db;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.back-to-top:active {
+    transform: translateY(0);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
 .site-header,
 .site-footer {
     background: #111827;
@@ -197,8 +227,11 @@ main {
 }
 
 .hero {
-    /* Background image from Vecteezy: https://static.vecteezy.com/system/resources/thumbnails/035/648/803/small/ai-generated-clothing-store-display-cases-and-racks-with-clothes-ai-generated-image-photo.jpg */
-    background: linear-gradient(135deg, rgba(17, 24, 39, 0.85), rgba(31, 41, 55, 0.85)), url('https://static.vecteezy.com/system/resources/thumbnails/035/648/803/small/ai-generated-clothing-store-display-cases-and-racks-with-clothes-ai-generated-image-photo.jpg');
+    /* background image
+     * Got image from https://www.vecteezy.com/
+     * Exact link to background image used https://static.vecteezy.com/system/resources/thumbnails/035/648/803/small/ai-generated-clothing-store-display-cases-and-racks-with-clothes-ai-generated-image-photo.jpg 
+     */
+    background: linear-gradient(135deg, rgba(17, 24, 39, 0.85), rgba(31, 41, 55, 0.85)), url('../images/shirtshome.jpg');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -584,3 +617,4 @@ dialog::backdrop {
         padding: 1rem;
     }
 }
+
