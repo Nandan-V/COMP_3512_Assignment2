@@ -1,8 +1,6 @@
-# COMP 3512 Assignment2
-
 # Overview
 
-The app simulates a small online clothing store. Users can:
+This project was created for COMP 3512 – Web Development II. The app simulates a small online clothing store. Users can:
 
 - Browse a catalog of products
 
